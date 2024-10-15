@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField]Level[] levels;
-    [SerializeField]int level = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    [SerializeField] Level[] levels;
+    [SerializeField] int level;
+    [SerializeField] GameObject brickPrefab;
+    void Start(){
+        Level currentLevel = levels[level];
+        for(int y = 0; y < currentLevel.rows.Length; y++){
+            Row row = currentLevel.rows[y];
+            for(int x = 0; x < row.cols.Length; x++){
+                int hp = row.cols[x];
+                if (hp != 0){
+                    Vector3 pos = new Vector3(x, y, 0);
+                    pos.x -= row.cols.Length / 2;
+                    pos.x *= brickPrefab.transform.localScale.y;
+                    pos.y -= currentLevel.rows.Length / 2;
+                    pos.y *= brickPrefab.transform.localScale.y;
+                    GameObject brick = Instantiate(brickPrefab, pos, Quaternion.identity);
+                }
+            }
+        }
     }
 }
 
 [System.Serializable]
-class Level{
-    public BrickData[,] bricks = new BrickData[7,7];
+struct Level{
+    public Row[] rows;
 }
 [System.Serializable]
-class BrickData{
-    public int health = 1;
+struct Row{
+    public int[] cols;
 }
+    

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Brick : MonoBehaviour
+public class BlockManager : MonoBehaviour
 {
     public static Color[] hpColors = new Color[]{
+        Color.white,
         Color.black,
         Color.blue,
         Color.magenta,
@@ -14,16 +15,18 @@ public class Brick : MonoBehaviour
         Color.yellow,
         Color.red
     };
-    [SerializeField] int health = 1;
-    // Start is called before the first frame update
-    void Start()
+
+    public int health = 1;
+    SpriteRenderer sr;
+
+    void Awake()
     {
-        
+        sr = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        sr.color = hpColors[health - 1];
     }
 }

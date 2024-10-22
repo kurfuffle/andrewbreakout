@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] Level[] levels;
     [SerializeField] int level;
-    [SerializeField] GameObject brickPrefab;
+    [SerializeField] GameObject blockPrefab;
     void Start(){
         Level currentLevel = levels[level];
         for(int y = 0; y < currentLevel.rows.Length; y++){
@@ -16,10 +16,11 @@ public class LevelManager : MonoBehaviour
                 if (hp != 0){
                     Vector3 pos = new Vector3(x, y, 0);
                     pos.x -= row.cols.Length / 2;
-                    pos.x *= brickPrefab.transform.localScale.y;
-                    pos.y -= currentLevel.rows.Length / 2;
-                    pos.y *= brickPrefab.transform.localScale.y;
-                    GameObject brick = Instantiate(brickPrefab, pos, Quaternion.identity);
+                    pos.x *= blockPrefab.transform.localScale.x;
+                    // pos.y -= currentLevel.rows.Length / 2;
+                    pos.y *= blockPrefab.transform.localScale.y;
+                    GameObject block = Instantiate(blockPrefab, pos, Quaternion.identity);
+                    block.GetComponent<BlockManager>().health = hp;
                 }
             }
         }

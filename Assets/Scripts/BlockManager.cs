@@ -16,17 +16,24 @@ public class BlockManager : MonoBehaviour
         Color.red
     };
 
-    public int health = 1;
+    public int hp = 1;
     SpriteRenderer sr;
+    private GameObject ball;
 
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        ball = GameObject.Find("Ball");
     }
 
 
     void Update()
     {
-        sr.color = hpColors[health - 1];
+        sr.color = hpColors[hp - 1];
+        if(Physics2D.IsTouching(GetComponent<Collider2D>(), ball.GetComponent<Collider2D>()))
+        {
+            hp--;
+            if(hp <= 0) Destroy(gameObject);
+        }
     }
 }

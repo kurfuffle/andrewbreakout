@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
                     // pos.y -= currentLevel.rows.Length / 2;
                     pos.y *= blockPrefab.transform.localScale.y;
                     GameObject block = Instantiate(blockPrefab, pos, Quaternion.identity);
-                    block.GetComponent<BlockManager>().health = hp;
+                    block.GetComponent<BlockManager>().hp = hp;
                 }
             }
         }

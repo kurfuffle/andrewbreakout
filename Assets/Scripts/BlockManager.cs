@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,22 +19,91 @@ public class BlockManager : MonoBehaviour
 
     public int hp = 1;
     SpriteRenderer sr;
-    private GameObject ball;
+    private Collider2D ball;
+    Rigidbody2D orb;
+    private bool debounce = true;
+    BoxCollider2D top;
+    BoxCollider2D bottom;
+    BoxCollider2D left;
+    BoxCollider2D right;
 
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        ball = GameObject.Find("Ball");
+        ball = GameObject.Find("Ball").GetComponent<Collider2D>();
+        orb = ball.GetComponent<Rigidbody2D>();
+
+        top = gameObject.AddComponent<BoxCollider2D>();
+        top.size = new Vector2(1, .1f);
+        top.offset = new Vector2(0, 0.45f);
+        top.isTrigger = true;
+
+        bottom = gameObject.AddComponent<BoxCollider2D>();
+        bottom.size = new Vector2(1, .1f);
+        bottom.offset = new Vector2(0, -0.45f);
+        bottom.isTrigger = true;
+
+        left = gameObject.AddComponent<BoxCollider2D>();
+        left.size = new Vector2(.1f, 1);
+        left.offset = new Vector2(-.45f, 0);
+        left.isTrigger = true;
+
+        right = gameObject.AddComponent<BoxCollider2D>();
+        right.size = new Vector2(.1f, 1);
+        right.offset = new Vector2(.45f, 0);
+        right.isTrigger = true;
     }
 
 
     void Update()
     {
         sr.color = hpColors[hp - 1];
-        if(Physics2D.IsTouching(GetComponent<Collider2D>(), ball.GetComponent<Collider2D>()))
+        if(Physics2D.IsTouching(top,ball));
         {
-            hp--;
-            if(hp <= 0) Destroy(gameObject);
+            orb.velocity = new Vector2(orb.velocity.x, Mathf.Abs(orb.velocity.y));
         }
+        if(Physics2D.IsTouching(bottom,ball));
+        {
+            orb.velocity = new Vector2(orb.velocity.x, -Mathf.Abs(orb.velocity.y));
+        }
+        if(Physics2D.IsTouching(left,ball));
+        {
+            orb.velocity = new Vector2(-Mathf.Abs(orb.velocity.x), orb.velocity.y);
+        }
+        if(Physics2D.IsTouching(right,ball));
+        {
+            orb.velocity = new Vector2(Mathf.Abs(orb.velocity.x), orb.velocity.y);
+        }
+        
     }
+
+    
+
+    // void OnTriggerEnter2D(Collider2D other)
+    // {
+
+    //     if(other.gameObject == ball && debounce)
+    //     {
+    //         hp--;
+    //         if(hp <= 0) Destroy(gameObject);
+    //         Debug.Log(other.transform.position.y - transform.position.y);
+    //          Rigidbody2D orb = other.GetComponent<Rigidbody2D>();
+    //         float offsetY = other.transform.position.y - transform.position.y;
+    //         if(MathF.Abs(offsetY) >= 0.45f)
+    //         {
+    //             orb.velocity = new Vector2(orb.velocity.x, -orb.velocity.y);
+    //         } 
+    //         else
+    //         {
+    //             orb.velocity = new Vector2(-orb.velocity.x, orb.velocity.y);
+    //         }
+    //         debounce = false;
+    //         Invoke("Debounce", .1f);
+    //     }
+    // }
+    void Debounce()
+    {
+        debounce = true;
+    }
+
 }

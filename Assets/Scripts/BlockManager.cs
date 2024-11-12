@@ -55,24 +55,44 @@ public class BlockManager : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         sr.color = hpColors[hp - 1];
-        if(Physics2D.IsTouching(top,ball));
+        if(Physics2D.IsTouching(top,ball))
         {
             orb.velocity = new Vector2(orb.velocity.x, Mathf.Abs(orb.velocity.y));
+            hp--;
+            if(hp <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
-        if(Physics2D.IsTouching(bottom,ball));
+        else if(Physics2D.IsTouching(bottom,ball))
         {
             orb.velocity = new Vector2(orb.velocity.x, -Mathf.Abs(orb.velocity.y));
+            hp--;
+            if(hp <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
-        if(Physics2D.IsTouching(left,ball));
+        else if(Physics2D.IsTouching(left,ball))
         {
             orb.velocity = new Vector2(-Mathf.Abs(orb.velocity.x), orb.velocity.y);
+            hp--;
+            if(hp <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
-        if(Physics2D.IsTouching(right,ball));
+        else if(Physics2D.IsTouching(right,ball))
         {
             orb.velocity = new Vector2(Mathf.Abs(orb.velocity.x), orb.velocity.y);
+            hp--;
+            if(hp <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
         
     }

@@ -39,5 +39,6 @@ public class BallController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Abs(rb.velocity.y));
         }
+        
     }
 }

@@ -6,11 +6,11 @@ public class BallController : MonoBehaviour
 {
     Rigidbody2D rb;
     public float speed = 1;
-    GameObject Paddle;
+    GameObject paddle;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        Paddle = GameObject.Find("Paddle");
+        paddle = GameObject.Find("Paddle");
     }
 
     void Update()
@@ -29,15 +29,16 @@ public class BallController : MonoBehaviour
         }
         if (rb.velocity == Vector2.zero) 
         {
-            transform.position = Paddle.transform.position + new Vector3(0, 0.5f, 0);
+            transform.position = paddle.transform.position + new Vector3(0, 0.5f, 0);
             if(Input.GetMouseButtonDown(0)  || Input.GetButtonDown("Jump"))
             {
                 rb.velocity = new Vector2(Random.Range(-1f, 1f), 1).normalized * speed;
             }
         }
-        if(Physics2D.IsTouching(GetComponent<Collider2D>(), Paddle.GetComponent<Collider2D>()))
+        if(Physics2D.IsTouching(GetComponent<Collider2D>(), paddle.GetComponent<Collider2D>()))
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Abs(rb.velocity.y));
+
+            rb.velocity = new Vector2((transform.position.x - paddle.transform.position.x) * 2, 1).normalized * speed;
         }
         
     }

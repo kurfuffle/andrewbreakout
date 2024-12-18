@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
+    
     public int hp;
     int score;
     UIManager ui;
     void Start()
     {
-        //get a reference to the ui manager
+        
+        
     }
 
     
     void Update()
     {
-        
+        if(hp <= 0)
+        {
+            UIManager.instance.ShowGameOverScreen();
+        }
     }
 }

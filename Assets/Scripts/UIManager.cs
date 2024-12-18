@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public Image hearts;
+    public GameObject gameOverScreen;
+    public RectTransform hearts;
     private Text score;
     private void Awake()
     {
+        base.Awake();
         score = transform.GetComponentInChildren<Text>();
+        gameOverScreen.SetActive(false);
+
+        
     }
     
     public void scoreUpdate(int setScore)
@@ -19,6 +24,12 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        
+        hearts.sizeDelta = new Vector2(GameManager.instance.hp * 30, 30);
     }
+
+    public void ShowGameOverScreen()
+    {
+        gameOverScreen.SetActive(true);
+    }
+
 }

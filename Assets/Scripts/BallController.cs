@@ -29,7 +29,7 @@ public class BallController : MonoBehaviour
         }
         if (rb.velocity == Vector2.zero) 
         {
-            transform.position = paddle.transform.position + new Vector3(0, 0.5f, 0);
+            transform.position = paddle.transform.position + new Vector3(0, 0.6f, 0);
             if(Input.GetMouseButtonDown(0)  || Input.GetButtonDown("Jump"))
             {
                 rb.velocity = new Vector2(Random.Range(-1f, 1f), 1).normalized * speed;
@@ -41,5 +41,11 @@ public class BallController : MonoBehaviour
             rb.velocity = new Vector2((transform.position.x - paddle.transform.position.x) * 2, 1).normalized * speed;
         }
         
+        if(transform.position.y < -5.25f)
+        {
+            rb.velocity = Vector2.zero;
+            GameManager.instance.hp--;
+        }
+
     }
 }

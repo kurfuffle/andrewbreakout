@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 [System.Serializable]
 public class BlockManager : MonoBehaviour
@@ -61,44 +63,34 @@ public class BlockManager : MonoBehaviour
         if(Physics2D.IsTouching(top,ball))
         {
             orb.velocity = new Vector2(orb.velocity.x, Mathf.Abs(orb.velocity.y));
-            hp--;
-            if(hp <= 0)
-            {
-                Destroy(gameObject);
-            }
+            Break();
         }
         else if(Physics2D.IsTouching(bottom,ball))
         {
             orb.velocity = new Vector2(orb.velocity.x, -Mathf.Abs(orb.velocity.y));
-            hp--;
-            if(hp <= 0)
-            {
-                Destroy(gameObject);
-            }
+            Break();
         }
         else if(Physics2D.IsTouching(left,ball))
         {
             orb.velocity = new Vector2(-Mathf.Abs(orb.velocity.x), orb.velocity.y);
-            hp--;
-            if(hp <= 0)
-            {
-                Destroy(gameObject);
-            }
+            Break();
         }
         else if(Physics2D.IsTouching(right,ball))
         {
             orb.velocity = new Vector2(Mathf.Abs(orb.velocity.x), orb.velocity.y);
-            hp--;
-            if(hp <= 0)
-            {
-                Destroy(gameObject);
-            }
+            Break();
         }
-        
     }
 
-    
-
+    void Break()
+    {
+        hp--;
+        if(hp <= 0)
+        {
+            Destroy(gameObject);
+            GameManager.instance.ChangeScore(1);
+        }
+    }
     // void OnTriggerEnter2D(Collider2D other)
     // {
 

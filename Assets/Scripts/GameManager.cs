@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         
+        Time.timeScale = 1;
         
     }
 
@@ -22,4 +23,10 @@ public class GameManager : Singleton<GameManager>
             UIManager.instance.ShowGameOverScreen();
         }
     }
+
+    public void ChangeScore(int amount){
+        score += amount;
+        UIManager.instance.ScoreUpdate(score);
+    }
+
 }

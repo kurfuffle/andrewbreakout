@@ -60,6 +60,9 @@ public class BlockManager : MonoBehaviour
     void FixedUpdate()
     {
         sr.color = hpColors[hp - 1];
+
+        if (!debounce) return;
+
         if(Physics2D.IsTouching(top,ball))
         {
             orb.velocity = new Vector2(orb.velocity.x, Mathf.Abs(orb.velocity.y));
@@ -90,6 +93,8 @@ public class BlockManager : MonoBehaviour
             Destroy(gameObject);
             GameManager.instance.ChangeScore(1);
         }
+        debounce = false;
+        Invoke("Debounce", .1f);
     }
     // void OnTriggerEnter2D(Collider2D other)
     // {

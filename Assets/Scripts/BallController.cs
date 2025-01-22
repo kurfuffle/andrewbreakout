@@ -38,7 +38,7 @@ public class BallController : MonoBehaviour
         if(Physics2D.IsTouching(GetComponent<Collider2D>(), paddle.GetComponent<Collider2D>()))
         {
 
-            rb.velocity = new Vector2((transform.position.x - paddle.transform.position.x) * 2, 1).normalized * speed;
+            rb.velocity = new Vector2((transform.position.x - paddle.transform.position.x) * 2, 1).normalized * rb.velocity.magnitude;
         }
         
         if(transform.position.y < -5.25f)

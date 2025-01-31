@@ -29,6 +29,8 @@ public class BlockManager : MonoBehaviour
     BoxCollider2D left;
     BoxCollider2D right;
 
+    public GameObject powerup;
+
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();

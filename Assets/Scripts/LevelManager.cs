@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] Level[] levels;
     [SerializeField] int level;
     [SerializeField] GameObject blockPrefab;
+    [SerializeField] List<PowerupManager> powerupList; 
     void Start(){
         Level currentLevel = levels[level];
         for(int y = 0; y < currentLevel.rows.Length; y++){
@@ -21,10 +22,18 @@ public class LevelManager : MonoBehaviour
                     pos.y *= blockPrefab.transform.localScale.y;
                     GameObject block = Instantiate(blockPrefab, pos, Quaternion.identity);
                     block.GetComponent<BlockManager>().hp = hp;
+
+
                 }
             }
         }
     }
+}
+
+public struct PowerupManager
+{
+    public GameObject powerup;
+    private int rarity;
 }
 
 [System.Serializable]

@@ -18,19 +18,13 @@ public class GameManager : Singleton<GameManager>
     
     void Update()
     {
-        if(hp <= 0)
-        {
-            UIManager.instance.ShowGameOverScreen();
-        }
+        if(hp <= 0) UIManager.instance.ShowGameOverScreen();
     }
+
+    
 
     public void ChangeScore(int amount){
         score += amount;
         UIManager.instance.ScoreUpdate(score);
     }
-
-    public int GetScore(){
-        return score;
-    }
-
 }

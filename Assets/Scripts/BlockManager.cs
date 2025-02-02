@@ -96,6 +96,11 @@ public class BlockManager : MonoBehaviour
         hp--;
         if(hp <= 0)
         {
+            if(UnityEngine.Random.value <= 0.1f)
+            {
+                Instantiate(powerup, transform.position, Quaternion.identity);
+            }
+            
             Destroy(gameObject);
             GameManager.instance.ChangeScore(1);
         }
@@ -130,13 +135,6 @@ public class BlockManager : MonoBehaviour
         debounce = true;
     }
 
-    void IncreaseBallVelocity()
-    {
-        if (GameManager.instance.GetScore() >= 10)
-        {
-            Debug.Log("Increasing ball velocity");
-            orb.velocity *= 2.0f;
-        }
-    }
+    
 
 }

@@ -98,3 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
+  powerup: {fileID: 224797441206403681, guid: 71499da7e0ca64b49a6dc124a4338d96, type: 3}

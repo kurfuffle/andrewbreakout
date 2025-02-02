@@ -86,6 +86,10 @@ public class BlockManager : MonoBehaviour
             Break();
         }
     }
+    
+
+
+
 
     void Break()
     {
@@ -98,6 +102,7 @@ public class BlockManager : MonoBehaviour
         debounce = false;
         Invoke("Debounce", .1f);
     }
+
     // void OnTriggerEnter2D(Collider2D other)
     // {
 
@@ -123,6 +128,15 @@ public class BlockManager : MonoBehaviour
     void Debounce()
     {
         debounce = true;
+    }
+
+    void IncreaseBallVelocity()
+    {
+        if (GameManager.instance.GetScore() >= 10)
+        {
+            Debug.Log("Increasing ball velocity");
+            orb.velocity *= 2.0f;
+        }
     }
 
 }

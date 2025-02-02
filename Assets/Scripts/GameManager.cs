@@ -29,4 +29,8 @@ public class GameManager : Singleton<GameManager>
         UIManager.instance.ScoreUpdate(score);
     }
 
+    public int GetScore(){
+        return score;
+    }
+
 }

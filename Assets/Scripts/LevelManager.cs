@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] int level;
     [SerializeField] GameObject blockPrefab;
     [SerializeField] List<PowerupManager> powerupList; 
+    
     void Start(){
         Level currentLevel = levels[level];
         for(int y = 0; y < currentLevel.rows.Length; y++){

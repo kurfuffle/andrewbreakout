@@ -105,7 +105,7 @@ public class BlockManager : MonoBehaviour
             GameManager.instance.ChangeScore(1);
         }
         debounce = false;
-        Invoke("Debounce", .1f);
+        Invoke("Debounce", 1.0f);
     }
 
     // void OnTriggerEnter2D(Collider2D other)
